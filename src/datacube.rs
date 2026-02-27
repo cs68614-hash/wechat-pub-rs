@@ -20,7 +20,7 @@ pub struct DatacubeRequest {
 }
 
 /// Generic wrapper for Datacube API responses.
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Serialize)]
 pub struct DatacubeResponse<T> {
     /// List of data items returned
     pub list: Vec<T>,
@@ -32,7 +32,7 @@ pub struct DatacubeResponse<T> {
 // ============== getarticleread (Daily Read Stats) ==============
 
 /// Represents the read statistics for an article on a given date.
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Serialize)]
 pub struct ArticleReadTotal {
     /// Date of statistics (YYYY-MM-DD)
     pub ref_date: String,
@@ -43,7 +43,7 @@ pub struct ArticleReadTotal {
 }
 
 /// Detailed read statistics for an article.
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Serialize)]
 pub struct ArticleReadDetail {
     /// Total read users
     pub read_user: u32,
@@ -52,7 +52,7 @@ pub struct ArticleReadDetail {
 }
 
 /// Breakdown of reading users by source.
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Serialize)]
 pub struct ReadUserSource {
     /// Number of users from this source
     pub user_count: u32,
@@ -63,7 +63,7 @@ pub struct ReadUserSource {
 // ============== getarticleshare (Daily Share Stats) ==============
 
 /// Represents the share statistics for an article on a given date.
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Serialize)]
 pub struct ArticleShareTotal {
     /// Date of statistics (YYYY-MM-DD)
     pub ref_date: String,
@@ -74,7 +74,7 @@ pub struct ArticleShareTotal {
 }
 
 /// Detailed share statistics.
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Serialize)]
 pub struct ArticleShareDetail {
     /// Total share users
     pub share_user: u32,
@@ -83,7 +83,7 @@ pub struct ArticleShareDetail {
 // ============== getbizsummary (Article Overview Summary) ==============
 
 /// Overview summary of article performance for a given date.
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Serialize)]
 pub struct ArticleSummary {
     /// Date of statistics (YYYY-MM-DD)
     pub ref_date: String,
@@ -92,7 +92,7 @@ pub struct ArticleSummary {
 }
 
 /// Detailed overview metrics summary.
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Serialize)]
 pub struct ArticleSummaryDetail {
     /// Total read users
     pub read_user: u32,
@@ -117,7 +117,7 @@ pub struct ArticleSummaryDetail {
 // ============== getarticletotaldetail (Total Detail per article) ==============
 
 /// Detailed statistics tracking a single article over time.
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Serialize)]
 pub struct ArticleTotalDetail {
     /// Date of publication (YYYY-MM-DD)
     pub ref_date: String,
@@ -130,7 +130,7 @@ pub struct ArticleTotalDetail {
 }
 
 /// Daily detailed statistics tracking for an article since publication.
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Serialize)]
 pub struct ArticleStatDetail {
     /// Stat date (YYYY-MM-DD)
     pub stat_date: String,
@@ -156,7 +156,7 @@ pub struct ArticleStatDetail {
 }
 
 /// User drop-off positions within the article text.
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Serialize)]
 pub struct ReadJumpPosition {
     /// Position quartile: 1: 0-20%, 2: 20-40%, etc.
     pub position: u32,
