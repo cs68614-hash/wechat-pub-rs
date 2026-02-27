@@ -3,6 +3,7 @@
 use tracing::{debug, info};
 
 use crate::auth::TokenManager;
+use crate::datacube::DatacubeClient;
 use crate::error::{Result, WeChatError};
 use crate::http::WeChatHttpClient;
 use crate::markdown::{MarkdownContent, MarkdownParser};
@@ -105,6 +106,7 @@ pub struct WeChatClient {
     draft_manager: DraftManager,
     markdown_parser: MarkdownParser,
     theme_manager: ThemeManager,
+    datacube_client: DatacubeClient,
 }
 
 impl WeChatClient {
@@ -132,6 +134,10 @@ impl WeChatClient {
 
         let draft_manager = DraftManager::new(Arc::clone(&http_client), Arc::clone(&token_manager));
 
+        let datacube_client =
+            DatacubeClient::new(Arc::clone(&http_client), Arc::clone(&token_manager));
+
+
         let markdown_parser = MarkdownParser::new();
         let theme_manager = ThemeManager::new();
 
@@ -142,6 +148,7 @@ impl WeChatClient {
             draft_manager,
             markdown_parser,
             theme_manager,
+            datacube_client,
         })
     }
 
@@ -424,6 +431,11 @@ impl WeChatClient {
     }
 
     // Private helper methods
+
+    /// Returns the Datacube API client
+    pub fn datacube(&self) -> &DatacubeClient {
+        &self.datacube_client
+    }
 
     async fn validate_upload_input(
         &self,
